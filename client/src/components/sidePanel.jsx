@@ -10,7 +10,7 @@ export default function SidePanel({ location }) {
   const { name, description, kuvaUrl, score, reviewCount } = location
 
   return (
-    <div className="min-h-full w-80 bg-white left-0 top-0 bottom-0 p-2 drop-shadow-lg">
+    <div className="min-h-full w-96 bg-white left-0 top-0 bottom-0 p-2 drop-shadow-lg">
       <div className="flex justify-end">
         <Link to={'/'}>X</Link>
       </div>

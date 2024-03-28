@@ -19,6 +19,7 @@ export default function reviewForm({ location }) {
       ...formData,
       [e.target.name]: e.target.value,
     })
+    console.log(formData)
   }
 
   function handleSubmit(e) {
@@ -42,17 +43,69 @@ export default function reviewForm({ location }) {
           />
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="title">Score</label>
-          <input
-            type="number"
-            min={1}
-            max={5}
-            name="score"
-            id="score"
-            onChange={handleFormChange}
-            className="border border-blue-950"
-            required
-          />
+          <p>Rating</p>
+          <div className="flex justify-around items-stretch">
+            <div className="flex items-center gap-1">
+              <label htmlFor="rating1">1</label>
+              <input
+                type="radio"
+                value={1}
+                name="rating"
+                id="rating1"
+                onChange={handleFormChange}
+                className="border border-blue-950"
+                required
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <label htmlFor="rating2">2</label>
+              <input
+                type="radio"
+                value={2}
+                name="rating"
+                id="rating2"
+                onChange={handleFormChange}
+                className="border border-blue-950"
+                required
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <label htmlFor="rating3">3</label>
+              <input
+                type="radio"
+                value={3}
+                name="rating"
+                id="rating3"
+                onChange={handleFormChange}
+                className="border border-blue-950"
+                required
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <label htmlFor="rating4">4</label>
+              <input
+                type="radio"
+                value={4}
+                name="rating"
+                id="rating4"
+                onChange={handleFormChange}
+                className="border border-blue-950"
+                required
+              />
+            </div>
+            <div className="flex items-center gap-1">
+              <label htmlFor="rating5">5</label>
+              <input
+                type="radio"
+                value={5}
+                name="rating"
+                id="rating5"
+                onChange={handleFormChange}
+                className="border border-blue-950"
+                required
+              />
+            </div>
+          </div>
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
           <label htmlFor="text">Text</label>
