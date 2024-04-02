@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const reviewSchema = new mongoose.Schema({
   title:  { type: String, default: '' },
   text:  { type: String, default: '' },
-  rating: { type: Number, default: 0 },
+  rating: { type: Number, default: 1 },
   dateAdded: { type: Date, default: Date.now },
   userName:  { type: String, default: '' },
   score: { type: Number, default: 0 },

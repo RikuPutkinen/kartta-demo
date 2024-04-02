@@ -9,7 +9,7 @@ const markerSchema = new mongoose.Schema({
   description: { type: String, default: '' },
   imageUrl: { type: String, default: '' },
   dateAdded: { type: Date, default: Date.now },
-  rating: { type: Number, default: 0 },
+  rating: { type: Number, default: 1 },
   reviewCount: { type: Number, default: 0 },
 });
 
