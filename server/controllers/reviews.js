@@ -14,25 +14,26 @@ reviewRouter.get('/marker/:markerId', async (req, res) => {
 reviewRouter.post('/marker/:markerId', async (req, res) => {
   try {
     const markerId = req.params.markerId
-    const newReview = {
-      ...req.body,
-      dateAdded: Date.now(),
-      votes: 0
-    }
-    const review = new Review(newReview)
+    const newReview = req.body
+
+    const review = new Review({
+      ...newReview,
+      markerId
+    })
     await review.save()
 
     const marker = await Marker.findById(markerId)
     const reviews = await Review.find({ markerId })
     const reviewCount = reviews.length
-    const reviewScore = reviews.reduce((a, c) => a + c.score, 0)
+    const reviewScore = reviews.reduce((a, c) => a + c.rating, 0) / reviewCount
 
-    marker.score = reviewScore
+    marker.rating = reviewScore
     marker.reviewCount = reviewCount
-    marker.save()
+    await marker.save()
 
     res.json(review)
   } catch (e) {
+    console.log(e)
     res.status(400).send(e)
   }
 })
