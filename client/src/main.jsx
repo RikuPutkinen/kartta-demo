@@ -12,7 +12,6 @@ import formVisibilityReducer from './reducers/formVisibilityReducer'
 const reducer = {
   formVisibility: formVisibilityReducer,
 }
-console.log(reducer)
 const store = configureStore({ reducer })
 
 const queryClient = new QueryClient()

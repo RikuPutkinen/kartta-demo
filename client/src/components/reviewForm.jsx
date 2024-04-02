@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { changeFormVisibility } from '../reducers/formVisibilityReducer'
+import { createReview } from '../requests/reviewRequests'
 import { useDispatch, useSelector } from 'react-redux'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export default function reviewForm({ location }) {
   const dispatch = useDispatch()
@@ -11,7 +13,16 @@ export default function reviewForm({ location }) {
     title: '',
     text: '',
     rating: '1',
-    nickname: '',
+    userName: '',
+  })
+
+  const queryClient = useQueryClient()
+  const newReviewMutation = useMutation({
+    mutationFn: ({ id, data }) => createReview(id, data),
+    onSuccess: data => {
+      const reviews = queryClient.getQueryData(['reviews', id])
+      queryClient.setQueryData(['reviews', id], [...reviews, data])
+    },
   })
 
   function handleFormChange(e) {
@@ -19,12 +30,11 @@ export default function reviewForm({ location }) {
       ...formData,
       [e.target.name]: e.target.value,
     })
-    console.log(formData)
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    console.log(formData)
+    newReviewMutation.mutate({ id: id, data: formData })
   }
 
   return (
@@ -118,11 +128,11 @@ export default function reviewForm({ location }) {
           />
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="nickname">Nickname</label>
+          <label htmlFor="userName">Username</label>
           <input
             type="text"
-            name="nickname"
-            id="nickname"
+            name="userName"
+            id="userName"
             onChange={handleFormChange}
             className="border border-blue-950"
             required

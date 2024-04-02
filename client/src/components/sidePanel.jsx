@@ -1,13 +1,26 @@
-import { useState } from 'react'
 import ReviewForm from './reviewForm'
+import ReviewList from './reviewList'
 import { Link } from 'react-router-dom'
 import { changeFormVisibility } from '../reducers/formVisibilityReducer'
+import { useReviewQuery } from '../hooks/reviewHooks'
 import { useDispatch, useSelector } from 'react-redux'
+
+function fix(num, dec) {
+  return num.toFixed(dec)
+}
 
 export default function SidePanel({ location }) {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.formVisibility)
-  const { name, description, kuvaUrl, score, reviewCount } = location
+  const { id, name, description, kuvaUrl, rating, reviewCount } = location
+
+  const req = useReviewQuery(id)
+
+  if (req.isLoading) {
+    return <div>Loading...</div>
+  }
+
+  const reviews = req.data
 
   return (
     <div className="min-h-full w-96 bg-white left-0 top-0 bottom-0 p-2 drop-shadow-lg">
@@ -22,7 +35,7 @@ export default function SidePanel({ location }) {
         />
         <h2 className="text-xl font-bold">{name}</h2>
         <p>{description}</p>
-        {reviewCount === 0 ? null : <p>{score} / 5</p>}
+        {reviewCount === 0 ? null : <p>{fix(rating, 1)} / 5</p>}
         <p className="text-gray-500">{reviewCount} reviews</p>
       </div>
       <div className="mt-4">
@@ -34,6 +47,7 @@ export default function SidePanel({ location }) {
           Post a review
         </button>
         <ReviewForm location={location} visible={visible} />
+        <ReviewList reviews={reviews} />
       </div>
     </div>
   )
