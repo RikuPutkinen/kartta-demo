@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const markerSchema = new mongoose.Schema({
-  name: String,
+  name:  { type: String, default: '' },
   location: {
     type: { type: String, default: 'Point' },
     coordinates: [Number], // [longitude, latitude]
   },
-  description: String,
-  imageUrl: String,
-  dateAdded: Date,
-  score: Number,
-  reviewCount: Number,
+  description: { type: String, default: '' },
+  imageUrl: { type: String, default: '' },
+  dateAdded: { type: Date, default: Date.now },
+  rating: { type: Number, default: 0 },
+  reviewCount: { type: Number, default: 0 },
 });
 
 markerSchema.set('toJSON', {

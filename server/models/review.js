@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 
 const reviewSchema = new mongoose.Schema({
-  title: String,
-  text: String,
-  rating: Number,
-  dateAdded: Date,
-  name: String,
-  score: Number,
-  likes: Number,
-  dislikes: Number,
+  title:  { type: String, default: '' },
+  text:  { type: String, default: '' },
+  rating: { type: Number, default: 0 },
+  dateAdded: { type: Date, default: Date.now },
+  userName:  { type: String, default: '' },
+  score: { type: Number, default: 0 },
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 },
   markerId: mongoose.Schema.Types.ObjectId
 })
 
