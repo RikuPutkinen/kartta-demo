@@ -1,27 +1,63 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { changeFormVisibility } from '../reducers/formVisibilityReducer'
 import { createReview } from '../requests/reviewRequests'
 import { useDispatch, useSelector } from 'react-redux'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useLocation } from 'react-router-dom'
 
-export default function reviewForm({ location }) {
+function Radio({ value, name, state, handleChange }) {
+  return (
+    <div className="flex items-center gap-1">
+      <label htmlFor="rating1">{value}</label>
+      <input
+        type="radio"
+        value={value}
+        name={name}
+        id={`${name}${value}`}
+        checked={state[name] == value}
+        onChange={handleChange}
+        className="border border-blue-950"
+        required
+      />
+    </div>
+  )
+}
+
+export default function reviewForm({ locationId }) {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.formVisibility)
+  const location = useLocation()
+  const radioOptions = [1, 2, 3, 4, 5]
 
-  const { id } = location
   const [formData, setFormData] = useState({
     title: '',
     text: '',
-    rating: '1',
+    rating: 1,
     userName: '',
   })
 
+  function closeForm() {
+    dispatch(changeFormVisibility(false))
+    setFormData({
+      title: '',
+      text: '',
+      rating: 1,
+      userName: '',
+    })
+  }
+
+  useEffect(() => {
+    closeForm()
+  }, [location])
+
   const queryClient = useQueryClient()
   const newReviewMutation = useMutation({
-    mutationFn: ({ id, data }) => createReview(id, data),
+    mutationFn: ({ locationId, data }) => createReview(locationId, data),
     onSuccess: data => {
-      const reviews = queryClient.getQueryData(['reviews', id])
-      queryClient.setQueryData(['reviews', id], [...reviews, data])
+      const reviews = queryClient.getQueryData(['reviews', locationId])
+      queryClient.setQueryData(['reviews', locationId], [...reviews, data])
+
+      closeForm()
     },
   })
 
@@ -32,9 +68,9 @@ export default function reviewForm({ location }) {
     })
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
-    newReviewMutation.mutate({ id: id, data: formData })
+    newReviewMutation.mutate({ locationId: locationId, data: formData })
   }
 
   return (
@@ -47,6 +83,7 @@ export default function reviewForm({ location }) {
             type="text"
             name="title"
             id="title"
+            value={formData.title}
             onChange={handleFormChange}
             className="border border-blue-950"
             required
@@ -55,66 +92,15 @@ export default function reviewForm({ location }) {
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
           <p>Rating</p>
           <div className="flex justify-around items-stretch">
-            <div className="flex items-center gap-1">
-              <label htmlFor="rating1">1</label>
-              <input
-                type="radio"
-                value={1}
-                name="rating"
-                id="rating1"
-                onChange={handleFormChange}
-                className="border border-blue-950"
-                required
+            {radioOptions.map(opt => (
+              <Radio
+                key={opt}
+                value={opt}
+                name={'rating'}
+                state={formData}
+                handleChange={handleFormChange}
               />
-            </div>
-            <div className="flex items-center gap-1">
-              <label htmlFor="rating2">2</label>
-              <input
-                type="radio"
-                value={2}
-                name="rating"
-                id="rating2"
-                onChange={handleFormChange}
-                className="border border-blue-950"
-                required
-              />
-            </div>
-            <div className="flex items-center gap-1">
-              <label htmlFor="rating3">3</label>
-              <input
-                type="radio"
-                value={3}
-                name="rating"
-                id="rating3"
-                onChange={handleFormChange}
-                className="border border-blue-950"
-                required
-              />
-            </div>
-            <div className="flex items-center gap-1">
-              <label htmlFor="rating4">4</label>
-              <input
-                type="radio"
-                value={4}
-                name="rating"
-                id="rating4"
-                onChange={handleFormChange}
-                className="border border-blue-950"
-                required
-              />
-            </div>
-            <div className="flex items-center gap-1">
-              <label htmlFor="rating5">5</label>
-              <input
-                type="radio"
-                value={5}
-                name="rating"
-                id="rating5"
-                onChange={handleFormChange}
-                className="border border-blue-950"
-                required
-              />
-            </div>
+            ))}
           </div>
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
@@ -122,6 +108,7 @@ export default function reviewForm({ location }) {
           <textarea
             name="text"
             id="text"
+            value={formData.text}
             onChange={handleFormChange}
             className="border border-blue-950"
             required
@@ -133,6 +120,7 @@ export default function reviewForm({ location }) {
             type="text"
             name="userName"
             id="userName"
+            value={formData.userName}
             onChange={handleFormChange}
             className="border border-blue-950"
             required
@@ -151,7 +139,7 @@ export default function reviewForm({ location }) {
         <button
           type="button"
           className="border border-blue-950 rounded-sm p-1"
-          onClick={() => dispatch(changeFormVisibility(false))}
+          onClick={closeForm}
         >
           Cancel
         </button>

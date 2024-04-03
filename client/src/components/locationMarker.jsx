@@ -1,9 +1,6 @@
 import { Marker, Popup } from 'react-leaflet'
 import { Link } from 'react-router-dom'
-
-function fix(num, dec) {
-  return num.toFixed(dec)
-}
+import fix from '../utils/fix'
 
 export default function LocationMarker({ data }) {
   const { id, name, description, kuvaUrl, location, rating, reviewCount } = data

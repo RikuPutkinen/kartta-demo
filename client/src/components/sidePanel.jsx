@@ -46,7 +46,7 @@ export default function SidePanel({ location }) {
         >
           Post a review
         </button>
-        <ReviewForm location={location} visible={visible} />
+        <ReviewForm locationId={location.id} visible={visible} />
         <ReviewList reviews={reviews} />
       </div>
     </div>
