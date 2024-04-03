@@ -8,9 +8,11 @@ import App from './App.jsx'
 import './index.css'
 
 import formVisibilityReducer from './reducers/formVisibilityReducer'
+import favoriteLocationReducer from './reducers/favoriteLocationReducer.js'
 
 const reducer = {
   formVisibility: formVisibilityReducer,
+  favoriteLocations: favoriteLocationReducer,
 }
 const store = configureStore({ reducer })
 
