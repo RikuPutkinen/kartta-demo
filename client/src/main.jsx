@@ -9,12 +9,17 @@ import './index.css'
 
 import formVisibilityReducer from './reducers/formVisibilityReducer'
 import favoriteLocationReducer from './reducers/favoriteLocationReducer.js'
+import { listenerMiddleware } from './middleware/listenerMiddleware.js'
 
 const reducer = {
   formVisibility: formVisibilityReducer,
   favoriteLocations: favoriteLocationReducer,
 }
-const store = configureStore({ reducer })
+const store = configureStore({
+  reducer: reducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().prepend(listenerMiddleware.middleware),
+})
 
 const queryClient = new QueryClient()
 
