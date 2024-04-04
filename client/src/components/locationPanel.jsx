@@ -24,7 +24,7 @@ export default function LocationPanel({ location }) {
 
   return (
     <div className="max-h-screen w-96 bg-white left-0 top-0 bottom-0 drop-shadow-lg z-[2000] relative overflow-x-auto">
-      <div className="bg-white sticky top-0 pb-2 drop-shadow-md p-2">
+      <div className="bg-white sticky top-0 p-2 drop-shadow-md">
         <div className="absolute left-2">
           <FavoriteButton id={id} />
         </div>
