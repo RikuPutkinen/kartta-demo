@@ -8,11 +8,11 @@ export default function Review({ review }) {
   const queryClient = useQueryClient()
   const { title, text, rating, dateAdded, userName, likes, dislikes } = review
   const locationId = review.markerId
+  const date = new Date(dateAdded)
 
   const reviewUpdateMutation = useMutation({
     mutationFn: updateReview,
     onSuccess: data => {
-      const reviews = queryClient.getQueryData(['reviews', locationId])
       queryClient.setQueryData(['reviews', locationId], old =>
         old.map(r => (r.id === data.id ? data : r))
       )
@@ -37,10 +37,9 @@ export default function Review({ review }) {
 
     reviewUpdateMutation.mutate(reviewToUpdate)
   }
-  const date = new Date(dateAdded)
 
   return (
-    <li className="border border-blue-200 p-2 my-3">
+    <li className="border border-blue-400 p-2 my-3">
       <h4 className="flex text-lg font-medium">
         {rating}/5, {title}
       </h4>

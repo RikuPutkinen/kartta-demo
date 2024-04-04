@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import { changeFormVisibility } from '../reducers/formVisibilityReducer'
 import { useReviewQuery } from '../hooks/reviewHooks'
 import { useDispatch, useSelector } from 'react-redux'
+import Icon from '@mdi/react'
+import { mdiClose } from '@mdi/js'
+import FavoriteButton from './favoriteButton'
+import fix from '../utils/fix'
 
-function fix(num, dec) {
-  return num.toFixed(dec)
-}
-
-export default function SidePanel({ location }) {
+export default function LocationPanel({ location }) {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.formVisibility)
   const { id, name, description, kuvaUrl, rating, reviewCount } = location
@@ -23,9 +23,14 @@ export default function SidePanel({ location }) {
   const reviews = req.data
 
   return (
-    <div className="min-h-full w-96 bg-white left-0 top-0 bottom-0 p-2 drop-shadow-lg">
-      <div className="flex justify-end">
-        <Link to={'/'}>X</Link>
+    <div className="min-h-full w-96 bg-white left-0 top-0 bottom-0 p-2 drop-shadow-lg z-[2000]">
+      <div className="absolute left-2">
+        <FavoriteButton id={id} />
+      </div>
+      <div className=" absolute right-2 hover:bg-gray-200 rounded-full">
+        <Link to={'/'}>
+          <Icon path={mdiClose} size={1.5} className="text-gray-800" />
+        </Link>
       </div>
       <div>
         <img
@@ -46,7 +51,7 @@ export default function SidePanel({ location }) {
         >
           Post a review
         </button>
-        <ReviewForm locationId={location.id} visible={visible} />
+        <ReviewForm locationId={location.id} />
         <ReviewList reviews={reviews} />
       </div>
     </div>
