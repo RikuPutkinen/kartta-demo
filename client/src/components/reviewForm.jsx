@@ -78,7 +78,7 @@ export default function reviewForm({ locationId }) {
       <fieldset className="grid grid-cols-[max-content_1fr]">
         <legend className="text-lg">Write a review</legend>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Title *</label>
           <input
             type="text"
             name="title"
@@ -90,7 +90,7 @@ export default function reviewForm({ locationId }) {
           />
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <p>Rating</p>
+          <p>Rating *</p>
           <div className="flex justify-around items-stretch">
             {radioOptions.map(opt => (
               <Radio
@@ -104,7 +104,7 @@ export default function reviewForm({ locationId }) {
           </div>
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="text">Text</label>
+          <label htmlFor="text">Text *</label>
           <textarea
             name="text"
             id="text"
@@ -123,7 +123,6 @@ export default function reviewForm({ locationId }) {
             value={formData.userName}
             onChange={handleFormChange}
             className="border border-blue-950"
-            required
           />
         </div>
         <div className="my-2 grid col-span-2">
