@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import FavoriteList from './favoriteList'
+import LocationList from './locationList'
 import { useLocationQuery } from '../hooks/locationHooks'
 import { Link } from 'react-router-dom'
 import Icon from '@mdi/react'
@@ -29,7 +29,7 @@ export default function FavoritePanel() {
         </div>
         <h2 className="text-2xl font-bold">Favorites</h2>
       </div>
-      <FavoriteList favorites={favorites} />
+      <LocationList locations={favorites} />
     </div>
   )
 }

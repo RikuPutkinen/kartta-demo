@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import FavoriteButton from './favoriteButton'
 
-function Favorite({ location }) {
+export default function LocationListItem({ location }) {
   const { id, name, description, kuvaUrl, rating, reviewCount } = location
   return (
     <li className="grid grid-cols-[6rem_1fr] gap-2 h-24 my-3 border border-blue-400">
@@ -16,15 +16,5 @@ function Favorite({ location }) {
         <FavoriteButton id={id} />
       </div>
     </li>
-  )
-}
-
-export default function FavoriteList({ favorites }) {
-  return (
-    <ul className="p-2">
-      {favorites.map(l => (
-        <Favorite location={l} key={l.id} />
-      ))}
-    </ul>
   )
 }
