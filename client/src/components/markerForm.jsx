@@ -51,38 +51,44 @@ export default function MarkerForm() {
           <fieldset className="grid grid-cols-[max-content_30ch]">
             <legend className="text-lg">Lisää markkeri</legend>
             <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-              <label htmlFor="name">Nimi</label>
+              <label htmlFor="name" className="self-center text-base">
+                Nimi
+              </label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={data.name}
                 onChange={handleChange}
-                className="border border-blue-950"
+                className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
                 required
               />
             </div>
             <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-              <label htmlFor="name">Kuvaus</label>
+              <label htmlFor="name" className="self-center text-base">
+                Kuvaus
+              </label>
               <input
                 type="text"
                 id="description"
                 name="description"
                 value={data.description}
                 onChange={handleChange}
-                className="border border-blue-950"
+                className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
                 required
               />
             </div>
             <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-              <label htmlFor="name">Kuvan url</label>
+              <label htmlFor="name" className="self-center text-base">
+                Kuvan url
+              </label>
               <input
                 type="text"
                 id="imageUrl"
                 name="imageUrl"
                 value={data.imageUrl}
                 onChange={handleChange}
-                className="border border-blue-950"
+                className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
                 required
               />
             </div>

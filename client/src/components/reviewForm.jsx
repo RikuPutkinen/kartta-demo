@@ -16,7 +16,7 @@ function Radio({ value, name, state, handleChange }) {
         id={`${name}${value}`}
         checked={state[name] == value}
         onChange={handleChange}
-        className="border border-blue-950"
+        className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
         required
       />
     </div>
@@ -78,19 +78,21 @@ export default function reviewForm({ locationId }) {
       <fieldset className="grid grid-cols-[max-content_1fr]">
         <legend className="text-lg">Write a review</legend>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="title">Title *</label>
+          <label htmlFor="title" className="self-center">
+            Title *
+          </label>
           <input
             type="text"
             name="title"
             id="title"
             value={formData.title}
             onChange={handleFormChange}
-            className="border border-blue-950"
+            className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
             required
           />
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <p>Rating *</p>
+          <p className="self-center">Rating *</p>
           <div className="flex justify-around items-stretch">
             {radioOptions.map(opt => (
               <Radio
@@ -104,25 +106,29 @@ export default function reviewForm({ locationId }) {
           </div>
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="text">Text *</label>
+          <label htmlFor="text" className="self-start">
+            Text *
+          </label>
           <textarea
             name="text"
             id="text"
             value={formData.text}
             onChange={handleFormChange}
-            className="border border-blue-950"
+            className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
             required
           />
         </div>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">
-          <label htmlFor="userName">Username</label>
+          <label htmlFor="userName" className="self-center">
+            Username
+          </label>
           <input
             type="text"
             name="userName"
             id="userName"
             value={formData.userName}
             onChange={handleFormChange}
-            className="border border-blue-950"
+            className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
           />
         </div>
         <div className="my-2 grid col-span-2">

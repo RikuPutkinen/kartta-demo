@@ -17,7 +17,6 @@ function Head({ query, setQuery }) {
           className="border border-blue-950 p-1 rounded-md focus:outline-blue-500 focus:outline focus:outline-2 focus:border-transparent"
           placeholder="Search"
         />
-        {/*focus:ring-1 focus:border-none focus:ring-blue-600 focus:ring-offset-1*/}
       </form>
     </>
   )
