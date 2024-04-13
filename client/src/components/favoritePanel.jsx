@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import LocationList from './locationList'
 import { useLocationQuery } from '../hooks/locationHooks'
-import { Link } from 'react-router-dom'
-import Icon from '@mdi/react'
-import { mdiClose } from '@mdi/js'
+import { changeFilter } from '../reducers/markerFilterReducer'
 import Panel from './panel'
+import { useEffect } from 'react'
 
 function Head() {
   return (
@@ -17,13 +16,17 @@ function Head() {
 export default function FavoritePanel() {
   const favoriteLocations = useSelector(state => state.favoriteLocations)
   const result = useLocationQuery()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(changeFilter({ type: 'favorites' }))
+  }, [dispatch])
 
   if (result.isLoading) {
     return <div>Loading...</div>
   }
 
   const locations = result.data
-
   const favorites = favoriteLocations.map(id =>
     locations.find(l => l.id === id)
   )

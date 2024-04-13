@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route, useMatch, Link } from 'react-router-dom'
 
 import MapArea from './components/mapArea'
@@ -8,6 +7,7 @@ import FavoritePanel from './components/favoritePanel'
 import Icon from '@mdi/react'
 import { mdiMapSearchOutline, mdiStar } from '@mdi/js'
 import SearchPanel from './components/searchPanel'
+
 function App() {
   const result = useLocationQuery()
   const match = useMatch('locations/:id')
