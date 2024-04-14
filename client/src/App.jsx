@@ -7,6 +7,7 @@ import FavoritePanel from './components/favoritePanel'
 import Icon from '@mdi/react'
 import { mdiMapSearchOutline, mdiStar } from '@mdi/js'
 import SearchPanel from './components/searchPanel'
+import ResultPanel from './components/resultPanel'
 
 function App() {
   const result = useLocationQuery()
@@ -28,6 +29,7 @@ function App() {
         />
         <Route path={'/favorites'} element={<FavoritePanel />} />
         <Route path={'/search'} element={<SearchPanel />} />
+        <Route path={'/results'} element={<ResultPanel />} />
         <Route path={'/'} element={null} />
       </Routes>
 

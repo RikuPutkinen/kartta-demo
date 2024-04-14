@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
-import MarkerForm from './markerForm'
+import NewMarker from './markerForm'
 import LocationMarker from './locationMarker'
 import { changeFilter } from '../reducers/markerFilterReducer'
 
@@ -14,11 +14,12 @@ import { useLocationQuery } from '../hooks/locationHooks'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import addDistances from '../utils/addDistances'
 
 function MyMap() {
   const result = useLocationQuery()
   const favoriteLocations = useSelector(state => state.favoriteLocations)
-  const locationFilter = useSelector(state => state.markerFilter)
+  const markerFilter = useSelector(state => state.markerFilter)
   const location = useLocation()
   const dispatch = useDispatch()
 
@@ -34,8 +35,12 @@ function MyMap() {
 
   let locations = result.data
 
-  if (locationFilter.type === 'favorites') {
+  if (markerFilter.type === 'favorites') {
     locations = locations.filter(l => favoriteLocations.includes(l.id))
+  }
+  if (markerFilter.type === 'radius') {
+    locations = addDistances(locations, markerFilter.center)
+    locations = locations.filter(l => l.distance <= markerFilter.radius)
   }
 
   return (
@@ -51,7 +56,7 @@ function MyMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <MarkerForm />
+      <NewMarker />
       {locations.map(marker => (
         <LocationMarker key={marker.id} data={marker} />
       ))}

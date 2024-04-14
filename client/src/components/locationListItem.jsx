@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import FavoriteButton from './favoriteButton'
+import fix from '../utils/fix'
 
 export default function LocationListItem({ location }) {
   const { id, name, description, kuvaUrl, rating, reviewCount } = location
@@ -12,6 +13,9 @@ export default function LocationListItem({ location }) {
         <Link to={`/locations/${id}`} className="block flex-1">
           <h3 className="font-semibold text-lg">{name}</h3>
           <p>{description}</p>
+          {location.distance ? (
+            <p>Distance: {fix(location.distance, 2)} km</p>
+          ) : null}
         </Link>
         <FavoriteButton id={id} />
       </div>

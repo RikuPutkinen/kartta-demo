@@ -1,11 +1,8 @@
 import ReviewForm from './reviewForm'
 import ReviewList from './reviewList'
-import { Link } from 'react-router-dom'
 import { changeFormVisibility } from '../reducers/formVisibilityReducer'
 import { useReviewQuery } from '../hooks/reviewHooks'
 import { useDispatch, useSelector } from 'react-redux'
-import Icon from '@mdi/react'
-import { mdiClose } from '@mdi/js'
 import FavoriteButton from './favoriteButton'
 import fix from '../utils/fix'
 import Panel from './panel'
@@ -14,7 +11,7 @@ function Head({ location }) {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.formVisibility)
   const { id, name, description, kuvaUrl, rating, reviewCount } = location
-
+  console.log(location)
   return (
     <>
       <div className="absolute left-2">
