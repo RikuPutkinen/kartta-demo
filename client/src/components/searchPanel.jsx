@@ -31,7 +31,6 @@ export default function SearchPanel() {
   }
 
   const locations = res.data
-  console.log(locations)
   const filteredLocations = locations.filter(l =>
     l.name.toLowerCase().includes(query.toLowerCase())
   )

@@ -8,9 +8,6 @@ export default function calculateDistance(location, center) {
   let [lon1, lat1] = location.location.coordinates
   let { lat: lat2, lng: lon2 } = center
 
-  console.log('lat1: ', lat1, 'lon1: ', lon1)
-  console.log('lat2: ', lat2, 'lon2: ', lon2)
-
   const earthRadiusKm = 6371
 
   const dLat = degreesToRadians(lat2 - lat1)

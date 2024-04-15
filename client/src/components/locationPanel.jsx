@@ -11,7 +11,6 @@ function Head({ location }) {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.formVisibility)
   const { id, name, description, kuvaUrl, rating, reviewCount } = location
-  console.log(location)
   return (
     <>
       <div className="absolute left-2">
