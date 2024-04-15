@@ -10,14 +10,18 @@ import SearchPanel from './components/searchPanel'
 import ResultPanel from './components/resultPanel'
 
 function App() {
-  const result = useLocationQuery()
+  const res = useLocationQuery()
   const match = useMatch('locations/:id')
 
-  if (result.isLoading) {
+  if (res.isLoading) {
     return <div>loading data...</div>
   }
 
-  const locations = result.data
+  if (res.isError) {
+    return <div>Error connecting to server</div>
+  }
+
+  const locations = res.data
   const location = match ? locations.find(l => l.id === match.params.id) : null
 
   return (

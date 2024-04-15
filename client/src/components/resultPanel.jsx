@@ -16,6 +16,10 @@ export default function ResultPanel() {
     return <div>Loading...</div>
   }
 
+  if (res.isError) {
+    return <div>Error connecting to server</div>
+  }
+
   const locations = res.data
 
   const locationsWithDistances = addDistances(locations, markerFilter.center)

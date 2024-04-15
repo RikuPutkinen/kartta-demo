@@ -40,13 +40,17 @@ function Head({ location }) {
 }
 
 export default function LocationPanel({ location }) {
-  const req = useReviewQuery(location.id)
+  const res = useReviewQuery(location.id)
 
-  if (req.isLoading) {
+  if (res.isLoading) {
     return <div>Loading...</div>
   }
 
-  const reviews = req.data
+  if (res.isError) {
+    return <div>Error connecting to server</div>
+  }
+
+  const reviews = res.data
 
   return (
     <Panel

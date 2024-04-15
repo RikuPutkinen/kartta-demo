@@ -30,6 +30,10 @@ export default function SearchPanel() {
     return <div>Loading...</div>
   }
 
+  if (res.isError) {
+    return <div>Error connecting to server</div>
+  }
+
   const locations = res.data
   const filteredLocations = locations.filter(l =>
     l.name.toLowerCase().includes(query.toLowerCase())

@@ -15,18 +15,22 @@ function Head() {
 
 export default function FavoritePanel() {
   const favoriteLocations = useSelector(state => state.favoriteLocations)
-  const result = useLocationQuery()
+  const res = useLocationQuery()
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(changeFilter({ type: 'favorites' }))
   }, [dispatch])
 
-  if (result.isLoading) {
+  if (res.isLoading) {
     return <div>Loading...</div>
   }
 
-  const locations = result.data
+  if (res.isError) {
+    return <div>Error connecting to server</div>
+  }
+
+  const locations = res.data
   const favorites = favoriteLocations.map(id =>
     locations.find(l => l.id === id)
   )

@@ -17,7 +17,7 @@ import { useEffect } from 'react'
 import addDistances from '../utils/addDistances'
 
 function MyMap() {
-  const result = useLocationQuery()
+  const res = useLocationQuery()
   const favoriteLocations = useSelector(state => state.favoriteLocations)
   const markerFilter = useSelector(state => state.markerFilter)
   const location = useLocation()
@@ -29,11 +29,15 @@ function MyMap() {
     }
   }, [dispatch, location])
 
-  if (result.isLoading) {
+  if (res.isLoading) {
     return <div>Loading...</div>
   }
 
-  let locations = result.data
+  if (res.isError) {
+    return <div>Error connecting to server</div>
+  }
+
+  let locations = res.data
 
   if (markerFilter.type === 'favorites') {
     locations = locations.filter(l => favoriteLocations.includes(l.id))
