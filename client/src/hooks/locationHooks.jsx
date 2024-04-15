@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
+const baseUrl = '/api/markers'
+
 export function useLocationQuery() {
   return useQuery({
     queryKey: ['locations'],
     queryFn: () =>
-      axios.get('http://localhost:3001/markers').then(res => res.data),
+      axios.get(baseUrl).then(res => res.data),
   })
 }

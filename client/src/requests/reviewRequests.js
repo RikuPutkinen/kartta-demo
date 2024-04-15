@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/reviews'
+const baseUrl = '/api/reviews'
 
 export async function getReviews(locationId) {
   const res = await axios.get(`${baseUrl}/marker/${locationId}`)

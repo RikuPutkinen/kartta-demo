@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export async function createMarker(markerData) {
   const res = await axios.post(
-    'http://localhost:3001/markers',
+    '/api/markers',
     {
       name: markerData.name,
       location: {

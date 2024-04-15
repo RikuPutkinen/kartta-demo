@@ -6,7 +6,7 @@ export function useReviewQuery(locationId) {
     queryKey: ['reviews', locationId],
     queryFn: () =>
       axios
-        .get(`http://localhost:3001/reviews/marker/${locationId}`)
+        .get(`/api/reviews/marker/${locationId}`)
         .then(res => res.data),
   })
 }

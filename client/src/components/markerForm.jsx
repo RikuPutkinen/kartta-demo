@@ -43,7 +43,7 @@ function MarkerForm({ position }) {
   }
 
   return (
-    <form action="http://localhost:3001" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <fieldset className="grid grid-cols-[max-content_30ch]">
         <legend className="text-lg text-center w-full">Add marker</legend>
         <div className="my-2 grid grid-cols-subgrid col-span-2 gap-2">

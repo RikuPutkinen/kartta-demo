@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGO_URI);
 
-app.use('/markers', markerRouter)
-app.use('/reviews', reviewRouter)
+app.use('/api/markers', markerRouter)
+app.use('/api/reviews', reviewRouter)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
