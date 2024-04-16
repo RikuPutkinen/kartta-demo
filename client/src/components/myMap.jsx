@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
-import NewMarker from './markerForm'
+import NewMarker from './newMarker'
 import LocationMarker from './locationMarker'
 import { changeFilter } from '../reducers/markerFilterReducer'
 
