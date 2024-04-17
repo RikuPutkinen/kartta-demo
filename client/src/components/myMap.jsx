@@ -9,15 +9,17 @@ import 'leaflet/dist/leaflet.css'
 import NewMarker from './newMarker'
 import LocationMarker from './locationMarker'
 import { changeFilter } from '../reducers/markerFilterReducer'
-
+import { useWeatherCameras } from '../hooks/weatherCameraHooks'
 import { useLocationQuery } from '../hooks/locationHooks'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import addDistances from '../utils/addDistances'
+import CameraMarker from './cameraMarker'
 
 function MyMap() {
-  const res = useLocationQuery()
+  const locationRes = useLocationQuery()
+  const weatherCameraRes = useWeatherCameras()
   const favoriteLocations = useSelector(state => state.favoriteLocations)
   const markerFilter = useSelector(state => state.markerFilter)
   const location = useLocation()
@@ -29,15 +31,21 @@ function MyMap() {
     }
   }, [dispatch, location])
 
-  if (res.isLoading) {
+  if (locationRes.isLoading) {
     return <div>Loading...</div>
   }
 
-  if (res.isError) {
+  if (locationRes.isError) {
     return <div>Error connecting to server</div>
   }
 
-  let locations = res.data
+  let weatherCameras = null
+  if (weatherCameraRes.isSuccess) {
+    weatherCameras = weatherCameraRes.data.features
+  }
+  console.log(weatherCameras)
+
+  let locations = locationRes.data
 
   if (markerFilter.type === 'favorites') {
     locations = locations.filter(l => favoriteLocations.includes(l.id))
@@ -64,6 +72,8 @@ function MyMap() {
       {locations.map(marker => (
         <LocationMarker key={marker.id} data={marker} />
       ))}
+      {weatherCameras &&
+        weatherCameras.map(cam => <CameraMarker key={cam.id} data={cam} />)}
     </MapContainer>
   )
 }

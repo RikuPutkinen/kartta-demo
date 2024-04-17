@@ -2,7 +2,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { Link } from 'react-router-dom'
 import fix from '../utils/fix'
 import FavoriteButton from './favoriteButton'
-import MarkerIcon from '../utils/icon'
+import { MarkerIcon } from '../utils/icons'
 
 export default function LocationMarker({ data }) {
   const { id, name, description, kuvaUrl, location, rating, reviewCount } = data

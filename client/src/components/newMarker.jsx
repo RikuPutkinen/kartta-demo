@@ -7,7 +7,7 @@ import { changeFilter } from '../reducers/markerFilterReducer'
 import Icon from '@mdi/react'
 import { mdiMapMarkerPlusOutline, mdiCrosshairs } from '@mdi/js'
 import { useNavigate } from 'react-router-dom'
-import MarkerIcon from '../utils/icon'
+import { MarkerIcon } from '../utils/icons'
 
 function MarkerForm({ position }) {
   const [data, setData] = useState({
