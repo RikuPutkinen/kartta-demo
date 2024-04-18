@@ -12,7 +12,7 @@ async function getAll() {
 }
 
 async function getOne(id) {
-  const res = await axios.get(`${baseUrl}/${id}`)
+  const res = await axios.get(`${baseUrl}/${id}`, { headers })
   return res.data
 }
 

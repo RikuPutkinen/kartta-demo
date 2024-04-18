@@ -43,7 +43,6 @@ function MyMap() {
   if (weatherCameraRes.isSuccess) {
     weatherCameras = weatherCameraRes.data.features
   }
-  console.log(weatherCameras)
 
   let locations = locationRes.data
 

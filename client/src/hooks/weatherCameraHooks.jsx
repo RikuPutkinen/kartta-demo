@@ -7,3 +7,10 @@ export function useWeatherCameras() {
     queryFn: weatherCameraRequests.getAll,
   })
 }
+
+export function useWeatherCamera(id) {
+  return useQuery({
+    queryKey: ['weatherCams', id],
+    queryFn: () => weatherCameraRequests.getOne(id),
+  })
+}
