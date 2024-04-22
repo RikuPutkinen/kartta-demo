@@ -26,3 +26,7 @@ A simple map application based on Open Street Maps and Leaflet.
 
 ### Search nearby locations
 ![The base view with search by radius active](https://github.com/RikuPutkinen/kartta-demo/blob/main/public/images/search-nearby.png?raw=true)
+
+### View weather camera images
+![The base view with the weather camera popup open](https://github.com/RikuPutkinen/kartta-demo/blob/main/public/images/weather-camera.png?raw=true)
+
